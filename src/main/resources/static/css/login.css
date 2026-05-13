@@ -1,0 +1,240 @@
+/* ============================================
+   AURA — Login y Register
+   ============================================ */
+   .auth-body {
+    overflow-y: auto;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-family: 'Exo 2', sans-serif;
+  }
+  
+  /* Fondo imagen globo */
+  .bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-image: url('/img/globe-bg.png');
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+  }
+  
+  .bg-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      to bottom,
+      rgba(2, 5, 15, 0.75) 0%,
+      rgba(2, 5, 15, 0.40) 45%,
+      rgba(2, 5, 15, 0.60) 100%
+    );
+  }
+  
+  .page {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+  }
+  
+  /* Card */
+  .card {
+    width: 100%;
+    max-width: 490px;
+    background: rgba(4, 14, 35, 0.80);
+    border: 1px solid rgba(26, 107, 255, 0.6);
+    border-radius: 20px;
+    padding: 48px 44px 40px;
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    box-shadow:
+      0 0 0 1px rgba(26,107,255,0.07),
+      0 0 70px rgba(26,107,255,0.14),
+      0 30px 80px rgba(0,0,0,0.75),
+      inset 0 1px 0 rgba(100,160,255,0.10);
+  }
+  
+  /* Título */
+  .title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .diamond { color: #3d8bff; font-size: 22px; }
+  
+  .subtitle {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #3d8bff;
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  
+  /* Formulario */
+  .form { display: flex; flex-direction: column; gap: 16px; }
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    align-items: center;
+    gap: 16px;
+  }
+  .form-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-align: right;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    background: rgba(6, 20, 50, 0.55);
+    border: 1px solid rgba(26,107,255,0.6);
+    border-radius: 8px;
+    padding: 13px 18px;
+    color: #ffffff;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  input::placeholder {
+    color: #94afd4;
+    letter-spacing: 2px;
+    font-size: 12px;
+  }
+  input:focus {
+    border-color: #3d8bff;
+    box-shadow: 0 0 0 3px rgba(26,107,255,0.14),
+                0 0 18px rgba(26,107,255,0.10);
+  }
+  
+  /* Checkbox */
+  .checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 116px;
+  }
+  .checkbox-row input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    accent-color: #3d8bff;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .checkbox-row label {
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #3d8bff;
+    cursor: pointer;
+  }
+  
+  /* Forgot */
+  .forgot {
+    display: block;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #3d8bff;
+    text-decoration: none;
+    margin-top: -4px;
+    transition: opacity 0.2s;
+  }
+  .forgot:hover { opacity: 0.7; }
+  
+  /* Botones */
+  .btn {
+    width: 100%;
+    padding: 13px;
+    border-radius: 8px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid rgba(26,107,255,0.6);
+    color: #ffffff;
+    background: transparent;
+  }
+  .btn:hover {
+    background: rgba(26,107,255,0.12);
+    box-shadow: 0 0 24px rgba(26,107,255,0.22);
+  }
+  .btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-color: rgba(26,107,255,0.35);
+  }
+  .btn-google:hover {
+    background: rgba(255,255,255,0.03);
+    border-color: rgba(26,107,255,0.6);
+  }
+  .google-logo { width: 18px; height: 18px; flex-shrink: 0; }
+  
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #94afd4;
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(26,107,255,0.22);
+  }
+  
+  /* Footer */
+  .card-footer {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .card-footer span { color: #3d8bff; }
+  .card-footer a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  .card-footer a:hover { color: #3d8bff; }
