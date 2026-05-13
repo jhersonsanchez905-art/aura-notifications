@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURA — Crear Cuenta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue:        #1a6bff;
+      --blue-light:  #3d8bff;
+      --blue-border: rgba(26, 107, 255, 0.6);
+      --card-bg:     rgba(4, 14, 35, 0.80);
+      --text:        #ffffff;
+      --text-sub:    #94afd4;
+      --input-bg:    rgba(6, 20, 50, 0.55);
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Exo 2', sans-serif;
+      background: #03060f;
+      overflow-y: auto;
+    }
+
+    /* ── FONDO: misma imagen del login ── */
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image: url('/img/globe-bg.png');
+      background-size: cover;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+    }
+
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(
+        to bottom,
+        rgba(2, 5, 15, 0.75) 0%,
+        rgba(2, 5, 15, 0.40) 45%,
+        rgba(2, 5, 15, 0.60) 100%
+      );
+    }
+
+    .page {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      width: 100%;
+      max-width: 530px;
+      background: var(--card-bg);
+      border: 1px solid var(--blue-border);
+      border-radius: 20px;
+      padding: 44px 48px 40px;
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      box-shadow:
+        0 0 0 1px rgba(26, 107, 255, 0.07),
+        0 0 70px rgba(26, 107, 255, 0.14),
+        0 30px 80px rgba(0, 0, 0, 0.75),
+        inset 0 1px 0 rgba(100, 160, 255, 0.10);
+    }
+
+    /* ── TÍTULO ── */
+    .title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text);
+      text-align: center;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .diamond { color: var(--blue-light); font-size: 20px; }
+
+    .subtitle {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    /* ── FORM ── */
+    .form { display: flex; flex-direction: column; gap: 14px; }
+
+    /* Fila label izquierda + input derecha (igual al Figma) */
+    .form-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .form-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text);
+      text-align: right;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid var(--blue-border);
+      border-radius: 7px;
+      padding: 11px 16px;
+      color: var(--text);
+      font-family: 'Exo 2', sans-serif;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input::placeholder {
+      color: var(--text-sub);
+      letter-spacing: 2px;
+      font-size: 11px;
+    }
+    input:focus {
+      border-color: var(--blue-light);
+      box-shadow: 0 0 0 3px rgba(26,107,255,0.14), 0 0 18px rgba(26,107,255,0.10);
+    }
+
+    /* Checkbox términos */
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-left: 116px;
+    }
+    .checkbox-row input[type="checkbox"] {
+      width: 14px;
+      height: 14px;
+      accent-color: var(--blue-light);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .checkbox-row label {
+      font-size: 10px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      cursor: pointer;
+    }
+
+    /* ── BOTONES ── */
+    .btn {
+      width: 100%;
+      padding: 13px;
+      border-radius: 8px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid var(--blue-border);
+      color: var(--text);
+      background: transparent;
+    }
+    .btn:hover {
+      background: rgba(26,107,255,0.12);
+      box-shadow: 0 0 24px rgba(26,107,255,0.22);
+    }
+
+    .btn-google {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-color: rgba(26,107,255,0.35);
+    }
+    .btn-google:hover {
+      background: rgba(255,255,255,0.03);
+      border-color: var(--blue-border);
+    }
+    .google-logo { width: 18px; height: 18px; flex-shrink: 0; }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-sub);
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(26,107,255,0.22);
+    }
+
+    /* ── FOOTER ── */
+    .card-footer {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 24px;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .card-footer span { color: var(--blue-light); }
+    .card-footer a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .card-footer a:hover { color: var(--blue-light); }
+  </style>
+</head>
+<body>
+
+  <div class="bg"></div>
+  <div class="bg-overlay"></div>
+
+  <div class="page">
+    <div class="card">
+
+      <h1 class="title">CREATE ACCOUNT <span class="diamond">✦</span></h1>
+      <p class="subtitle">A verification email will be sent after registration</p>
+
+      <form class="form" id="register-form">
+
+        <div class="form-row">
+          <label class="form-label">First Name:</label>
+          <input type="text" required>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label">Last Name:</label>
+          <input type="text" required>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label">Gmail:</label>
+          <input type="email" placeholder="EMAIL@GMAIL.COM" required>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label">Password:</label>
+          <input type="password" placeholder="••••••••••" required>
+        </div>
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="terms" required>
+          <label for="terms">I agree to Terms of Service and Privacy Policy</label>
+        </div>
+
+        <button type="submit" class="btn">Create Account</button>
+
+        <div class="divider">— OR —</div>
+
+        <button type="button" class="btn btn-google">
+          <svg class="google-logo" viewBox="0 0 48 48">
+            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+          </svg>
+          Continue with Google
+        </button>
+
+      </form>
+
+      <div class="card-footer">
+        <span>Don't have an account?</span>
+        <a href="/login.html">Sign In</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('register-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Cuenta creada (mock). Redirigiendo al login...');
+      window.location.href = '/login.html';
+    });
+  </script>
+</body>
+</html>
